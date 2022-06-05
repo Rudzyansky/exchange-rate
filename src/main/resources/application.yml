@@ -1,0 +1,16 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: exchange-rate
+  main:
+    banner-mode: off
+open-exchange-rates:
+  app-id: ${OER_TOKEN}
+  base-currency: USD
+giphy:
+  api-key: ${GIPHY_TOKEN}
+  rating: g
+  down-tag: rich
+  up-tag: broke
+  no-changes-tag: nothing
