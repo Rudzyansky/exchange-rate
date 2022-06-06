@@ -1,21 +1,22 @@
 package ru.ft.exchangerate.services;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProcessingService {
 
-    @Value("${giphy.down-tag}")
-    private String downTag;
+    private final String downTag;
+    private final String upTag;
+    private final String noChangesTag;
 
-    @Value("${giphy.up-tag}")
-    private String upTag;
+    public ProcessingService(Environment env) {
+        downTag = env.getProperty("giphy.down-tag", "rich");
+        upTag = env.getProperty("giphy.up-tag", "broke");
+        noChangesTag = env.getProperty("giphy.no-changes-tag", "nothing");
+    }
 
-    @Value("${giphy.no-changes-tag}")
-    private String noChangesTag;
-
-    public String tagByExchangeRates(Double today, Double yesterday) {
+    public String tagByExchangeRates(double today, double yesterday) {
         return today < yesterday ? downTag : today > yesterday ? upTag : noChangesTag;
     }
 }

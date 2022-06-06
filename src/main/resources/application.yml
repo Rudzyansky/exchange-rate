@@ -5,12 +5,11 @@ spring:
     name: exchange-rate
   main:
     banner-mode: off
+app:
+  timezone: UTC
 open-exchange-rates:
   app-id: ${OER_TOKEN}
   base-currency: USD
 giphy:
   api-key: ${GIPHY_TOKEN}
   rating: g
-  down-tag: rich
-  up-tag: broke
-  no-changes-tag: nothing

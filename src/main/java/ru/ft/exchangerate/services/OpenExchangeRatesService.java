@@ -18,13 +18,13 @@ public class OpenExchangeRatesService {
         this.openExchangeRatesClient = openExchangeRatesClient;
     }
 
-    public Double yesterday(String currency) {
+    public double yesterday(String currency) {
         LocalDate date = LocalDate.now(clock).minusDays(1);
         String formatted = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return openExchangeRatesClient.getHistorical(formatted, currency).rates.get(currency);
     }
 
-    public Double today(String currency) {
+    public double today(String currency) {
         LocalDate date = LocalDate.now(clock);
         String formatted = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return openExchangeRatesClient.getHistorical(formatted, currency).rates.get(currency);
