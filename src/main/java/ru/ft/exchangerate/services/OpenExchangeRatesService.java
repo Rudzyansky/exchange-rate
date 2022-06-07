@@ -1,7 +1,9 @@
 package ru.ft.exchangerate.services;
 
 import org.springframework.stereotype.Service;
+import ru.ft.exchangerate.openexchangerates.ExchangeRates;
 import ru.ft.exchangerate.openexchangerates.OpenExchangeRatesClient;
+import ru.ft.exchangerate.openexchangerates.OpenExchangeRatesException;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -22,7 +24,12 @@ public class OpenExchangeRatesService {
     }
 
     private double getRateByDate(String currency, LocalDate date) {
-        return openExchangeRatesClient.getHistorical(date.format(formatter), currency).rates.get(currency);
+        if (currency.length() != 3) throw OpenExchangeRatesException.NO_CURRENCY_FOUND;
+
+        ExchangeRates exchangeRates = openExchangeRatesClient.getHistorical(date.format(formatter), currency);
+
+        if (exchangeRates.rates.isEmpty()) throw OpenExchangeRatesException.NO_CURRENCY_FOUND;
+        return exchangeRates.rates.get(currency);
     }
 
     public double yesterday(String currency) {

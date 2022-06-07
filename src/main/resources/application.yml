@@ -6,10 +6,10 @@ spring:
   main:
     banner-mode: off
 app:
-  timezone: UTC
+  timezone: UTC # OpenExchangeRates uses UTC
 open-exchange-rates:
   app-id: ${OER_TOKEN}
   base-currency: USD
 giphy:
   api-key: ${GIPHY_TOKEN}
-  rating: g
+  rating: g # pg, pg13, r

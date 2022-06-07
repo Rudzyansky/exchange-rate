@@ -11,7 +11,7 @@ import java.util.TimeZone;
 @Configuration
 public class ApplicationConfig {
     @Bean
-    Clock getClock(Environment env) {
+    public Clock getClock(Environment env) {
         String zoneId = env.getProperty("app.timezone", TimeZone.getDefault().getID());
         return Clock.system(ZoneId.of(zoneId));
     }
