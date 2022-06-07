@@ -13,20 +13,23 @@ public class OpenExchangeRatesService {
     private final Clock clock;
     private final OpenExchangeRatesClient openExchangeRatesClient;
 
+    private final DateTimeFormatter formatter;
+
     public OpenExchangeRatesService(Clock clock, OpenExchangeRatesClient openExchangeRatesClient) {
         this.clock = clock;
         this.openExchangeRatesClient = openExchangeRatesClient;
+        this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    }
+
+    private double getRateByDate(String currency, LocalDate date) {
+        return openExchangeRatesClient.getHistorical(date.format(formatter), currency).rates.get(currency);
     }
 
     public double yesterday(String currency) {
-        LocalDate date = LocalDate.now(clock).minusDays(1);
-        String formatted = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return openExchangeRatesClient.getHistorical(formatted, currency).rates.get(currency);
+        return getRateByDate(currency, LocalDate.now(clock).minusDays(1));
     }
 
     public double today(String currency) {
-        LocalDate date = LocalDate.now(clock);
-        String formatted = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return openExchangeRatesClient.getHistorical(formatted, currency).rates.get(currency);
+        return getRateByDate(currency, LocalDate.now(clock));
     }
 }
