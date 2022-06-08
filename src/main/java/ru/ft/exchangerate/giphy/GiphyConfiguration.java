@@ -18,6 +18,7 @@ public class GiphyConfiguration {
                 if (singleResponse.meta != null)
                     return new GiphyException(singleResponse.meta.msg);
 
+                // В документации про это ни слова
                 ErrorObject errorObject = objectMapper.readValue(feignException.contentUTF8(), ErrorObject.class);
                 return new GiphyException(errorObject.message);
             } catch (JsonProcessingException ignore) {
