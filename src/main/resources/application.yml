@@ -12,4 +12,4 @@ open-exchange-rates:
   base-currency: USD
 giphy:
   api-key: ${GIPHY_TOKEN}
-  rating: g # pg, pg13, r
+  rating: g # Use one of: y, g, pg, pg-13, r, unrated, nsfw, [empty]

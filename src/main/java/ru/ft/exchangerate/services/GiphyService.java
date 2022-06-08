@@ -2,7 +2,9 @@ package ru.ft.exchangerate.services;
 
 import org.springframework.stereotype.Service;
 import ru.ft.exchangerate.giphy.GifsGiphyClient;
+import ru.ft.exchangerate.giphy.GiphyException;
 import ru.ft.exchangerate.giphy.MediaGiphyClient;
+import ru.ft.exchangerate.giphy.SingleResponse;
 
 @Service
 public class GiphyService {
@@ -16,7 +18,10 @@ public class GiphyService {
     }
 
     public byte[] getRandom(String tag) {
-        String id = gifsGiphyClient.getRandom(tag).data.id;
-        return mediaGiphyClient.gif(id);
+        SingleResponse response = gifsGiphyClient.getRandom(tag);
+        if (response.meta.status != 200) throw new GiphyException(response.meta.msg);
+        if (response.data == null) throw GiphyException.NOT_FOUND;
+
+        return mediaGiphyClient.gif(response.data.id);
     }
 }
