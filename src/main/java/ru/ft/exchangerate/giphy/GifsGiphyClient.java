@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "giphy", url = "api.giphy.com", path = "/v1/gifs", configuration = GiphyConfiguration.class)
+@FeignClient(name = "giphy", url = "${giphy.domain}", path = "/v1/gifs", configuration = GiphyConfiguration.class)
 public interface GifsGiphyClient {
 
     @GetMapping("/random?api_key=${giphy.api-key}&rating=${giphy.rating}&tag={tag}")

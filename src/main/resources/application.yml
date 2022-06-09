@@ -8,8 +8,12 @@ spring:
 app:
   timezone: UTC # OpenExchangeRates uses UTC
 open-exchange-rates:
+  domain: openexchangerates.org
   app-id: ${OER_TOKEN}
   base-currency: USD
 giphy:
+  domain: api.giphy.com
   api-key: ${GIPHY_TOKEN}
   rating: g # Use one of: y, g, pg, pg-13, r, unrated, nsfw, [empty]
+giphy-media:
+  domain: i.giphy.com
