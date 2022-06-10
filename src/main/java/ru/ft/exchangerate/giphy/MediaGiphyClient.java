@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "giphy-media", url = "${giphy-media.domain}", path = "/media")
+@FeignClient(name = "giphy-media", url = "${giphy-media.url}", path = "/media")
 public interface MediaGiphyClient {
 
     @GetMapping("/{id}/giphy.gif")
