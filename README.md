@@ -25,3 +25,5 @@ GIPHY_TOKEN=...
 ## Usage
 
 ### `GET /v1/gifs/currency-fluctuations/{currency}`
+
+List of currencies: https://docs.openexchangerates.org/docs/supported-currencies
